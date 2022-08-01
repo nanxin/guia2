@@ -1,5 +1,5 @@
-module github.com/electricbubble/guia2
+module github.com/nanxin/guia2
 
 go 1.13
 
-require github.com/electricbubble/gadb v0.0.7
+require github.com/nanxin/gadb v0.0.8

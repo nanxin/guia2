@@ -2,17 +2,31 @@ package main
 
 import (
 	"fmt"
-	"github.com/electricbubble/guia2"
+	"github.com/nanxin/guia2"
 	"io/ioutil"
 	"log"
 	"os"
 )
 
 func main() {
-	driver, err := guia2.NewUSBDriver()
+	devices, _ := guia2.DeviceList()
+	device := devices[0]
+	fmt.Println(device.Serial())
+	driver, err := guia2.NewUSBDriver(device)
 	// driver, err := guia2.NewWiFiDriver("192.168.1.28")
 	checkErr(err)
 	defer func() { _ = driver.Dispose() }()
+
+	info, err := driver.DeviceInfo()
+	fmt.Println(info)
+
+	driver.AppLaunch("com.unity.uprunitychan")
+	driver.AppTerminate("com.unity.uprunitychan")
+
+	bySelector := guia2.BySelector{UiAutomator: guia2.NewUiSelectorHelper().TextStartsWith("个性化定制").String()}
+	element, err := waitForElement(driver, bySelector)
+	checkErr(err)
+	checkErr(element.Click())
 
 	// err = driver.AppLaunch("tv.danmaku.bili")
 	err = driver.AppLaunch("tv.danmaku.bili", guia2.BySelector{ResourceIdID: "tv.danmaku.bili:id/action_bar_root"})
@@ -38,13 +52,13 @@ func main() {
 	err = driver.SwipePointF(startPoint, endPoint)
 	checkErr(err)
 
-	element, err := driver.FindElement(guia2.BySelector{ResourceIdID: "tv.danmaku.bili:id/expand_search"})
+	element, err = driver.FindElement(guia2.BySelector{ResourceIdID: "tv.danmaku.bili:id/expand_search"})
 	checkErr(err)
 
 	err = element.Click()
 	checkErr(err)
 
-	bySelector := guia2.BySelector{UiAutomator: guia2.NewUiSelectorHelper().Focused(true).String()}
+	bySelector = guia2.BySelector{UiAutomator: guia2.NewUiSelectorHelper().Focused(true).String()}
 	element, err = waitForElement(driver, bySelector)
 	checkErr(err)
 

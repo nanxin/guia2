@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/electricbubble/gadb"
+	"github.com/nanxin/gadb"
 	"net"
 	"os"
 	"path"

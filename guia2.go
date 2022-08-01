@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/electricbubble/gadb"
+	"github.com/nanxin/gadb"
 	"io/ioutil"
 	"log"
 	"net"

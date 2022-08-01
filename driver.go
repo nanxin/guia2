@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/electricbubble/gadb"
+	"github.com/nanxin/gadb"
 	"net/http"
 	"net/url"
 	"path"
