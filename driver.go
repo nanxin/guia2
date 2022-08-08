@@ -69,6 +69,7 @@ func NewDriver(capabilities Capabilities, urlPrefix string) (driver *Driver, err
 			if retryTimes > 10 {
 				return nil, err
 			} else {
+				fmt.Printf("waiting for appium server start, retry times %d\n", retryTimes)
 				retryTimes++
 				time.Sleep(time.Second)
 				continue
